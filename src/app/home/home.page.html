@@ -1,20 +1,27 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  
+  <h1>Analyse des risques</h1>
+  <div id="buttons">
+  
+  <ion-button id="add" (click)= "presentNew()"> 
+    <div>
+    <ion-icon name="expand-outline"></ion-icon>
+    <label>Chantier EvRP</label>
   </div>
+  </ion-button>
+  <ion-button id="history" href="/history" >
+    <div>
+    <ion-icon name="folder-outline"></ion-icon>
+    <label>Historique</label>
+  </div>
+  </ion-button>
+  <ion-button id='params' href="/parametres" >
+    <div>
+      <ion-icon name="settings-outline"></ion-icon>
+    <label>Parametres</label>
+    </div>
+  </ion-button>
+  
+</div>
 </ion-content>
