@@ -1,0 +1,47 @@
+<ion-header >
+  <ion-toolbar>
+    <ion-button  id='back' (click)="back()"> 
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <ion-title>Critère</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">Suivant</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-item>
+    <ion-label>Fréquence</ion-label>
+    <ion-select interface="action-sheet" cancelText="Annuler"  [(ngModel)]="this.risk.frequency">
+      <ion-select-option *ngFor="let frequency of tablefrequency;" [value]="frequency">
+       - {{ frequency.name}} 
+    </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item *ngIf="this.risk.id!='10'&&this.risk.id!='30'">
+    <ion-label>Gravité</ion-label>
+    <ion-select interface="action-sheet" cancelText="Annuler" class="custom-options"[(ngModel)]="this.risk.gravity">
+      <ion-select-option *ngFor="let gravity of tablegravity;" [value]="gravity">
+      - {{ gravity.name}} 
+    </ion-select-option>s
+    </ion-select>
+  </ion-item>
+  <ion-item *ngIf="this.risk.id=='30'">
+    <ion-label>Gravité</ion-label>
+    <ion-select interface="action-sheet" cancelText="Annuler" class="custom-options" [(ngModel)]="this.risk.gravity">
+      <ion-select-option *ngFor="let gravity of tablegravity2;" [value]="gravity">
+        {{ gravity.name}} 
+    </ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item *ngIf="this.risk.id=='10'">
+    <ion-label>Gravité</ion-label>
+    <ion-select interface="action-sheet"  cancelText="Annuler" class="custom-options" [(ngModel)]="this.risk.gravity">
+      <ion-select-option *ngFor="let gravity of tablegravity3;" [value]="gravity">
+        {{ gravity.name}} 
+    </ion-select-option>
+    </ion-select>
+  </ion-item>
+</ion-content>

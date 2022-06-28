@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button id='back' href="/home" >
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+  <ion-title>Paramètres</ion-title>
+</ion-toolbar>
+</ion-header>
+<ion-content>
+  <div id="buttons">
+    <ion-button id="add" (click)= "addRisk()"> 
+      <div>
+        <ion-icon id="icon" name="bag-add-outline"></ion-icon>
+      <label>Ajouter risque</label>
+    </div>
+    </ion-button>
+    <ion-button id="modify" (click)= "presentModify()" >
+      <div>
+        <ion-icon id="icon" name="pencil-outline"></ion-icon>
+      <label>Modifier risque</label>
+    </div>
+    </ion-button>
+    <ion-button id='params' (click)= "presentDelete()" >
+      <div>
+        <ion-icon  id="icon" name="trash-outline"></ion-icon>
+      <label>Supprimer risque</label>
+      </div>
+    </ion-button>
+    <!--
+    <ion-button id='seuil' (click)= "presentLimit()" >
+      <div>      
+      <label>Modifier seuil <br/> de criticité</label>
+      </div>
+    </ion-button>
+  -->
+  </div>
+</ion-content>

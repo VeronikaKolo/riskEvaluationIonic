@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button id='back' href="/history" >
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <ion-title>Synthese</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+   
+  <ion-button id='params' (click)= "exportToExcel()" >
+    <div>
+      <ion-icon name="settings-outline"></ion-icon>
+    <label>Export PDF</label>
+    </div>
+  </ion-button>
+  <ion-item id="title">
+    SITE
+  </ion-item>
+<ion-item>
+  <ion-label><b>Nom:</b></ion-label>
+  <ion-input type="text" placeholder="" [(ngModel)]="data.name"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label><b>Secteur :</b></ion-label>
+  <ion-input type="text" placeholder="" [(ngModel)]="data.secteur"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label><b>Nombre de personnes concernées : </b></ion-label>
+  <ion-input type="text" placeholder="" [(ngModel)]="data.number"></ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label>RISQUES</ion-label>
+  <ion-select [(ngModel)]="this.risk" [compareWith]="this.risk" cancelText="Annuler" (ionChange)="this.selected()">
+    <ion-select-option *ngFor="let risk of this.data.risks let i=index" [value]="this.data.risks[i]">{{risk.name}}</ion-select-option>
+  </ion-select>
+</ion-item>
+
+  <div *ngIf="this.riskselected">
+
+  <ion-item id="title_2">Général</ion-item>
+  <ion-item >
+    <ion-label><b>Nom:</b></ion-label>
+    <ion-input type="text" placeholder="" [(ngModel)]="this.risk.name"></ion-input>
+    </ion-item>
+    <ion-item >
+    <ion-label><b>Description:</b></ion-label>
+    <ion-input type="text" placeholder="" [(ngModel)]="this.risk.description.description"></ion-input>
+      </ion-item>
+      <ion-item >
+        <ion-label><b>Fréquence:</b></ion-label>
+        <ion-input type="text" placeholder="" [(ngModel)]="this.risk.frequency.name"></ion-input>
+        </ion-item>
+        <ion-item >
+          <ion-label><b>Gravité:</b></ion-label>
+          <ion-input type="text" placeholder="" [(ngModel)]="this.risk.gravity.name"></ion-input>
+          </ion-item>
+          <ion-item >
+            <ion-label><b>Maîtrise:</b></ion-label>
+            <ion-input type="text" placeholder="" [(ngModel)]="this.risk.maitrisenumber"></ion-input>
+            
+            </ion-item>
+      <ion-item   *ngIf="risk.maitrise.technique.length>0" id="title_2">Maitrise technique</ion-item>
+      <div *ngFor="let technique of risk.maitrise.technique let i=index">
+        <ion-item>
+        <ion-input type="text" placeholder="" [(ngModel)]="this.risk.maitrise.technique[i]"></ion-input>
+        
+        </ion-item>
+        </div>
+        <ion-item  *ngIf="risk.maitrise.organisationnel.length>0" id="title_2">Maitrise organisationnel</ion-item>
+        <div *ngFor="let organisationnel of risk.maitrise.organisationnel let i=index">
+          <ion-item>
+            <ion-input type="text" placeholder="" [(ngModel)]="this.risk.maitrise.organisationnel[i]"></ion-input>
+          </ion-item>
+          </div>
+          <ion-item *ngIf="risk.maitrise.humain.length>0" id="title_2">Maitrise humain</ion-item>
+          <div *ngFor="let humain of risk.maitrise.humain let i=index">
+            <ion-item>
+              <ion-input type="text" placeholder="" [(ngModel)]="this.risk.maitrise.humain[i]"></ion-input>
+            </ion-item>
+            </div>
+     <ion-button (click)="this.deleteRisk()"> Supprimer un risque</ion-button>
+  </div>
+<ion-button (click)="this.addRisk()"> Ajouter un risque</ion-button>  
+</ion-content>

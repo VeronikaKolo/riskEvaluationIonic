@@ -1,0 +1,463 @@
+{
+    "riskItems": [ 
+    {
+      "index": "0",
+      "id":"10",
+      "name": "Risque chimique (émissions, produits ...)",
+      "vigilance": [
+          
+            "Utilisation de produits",
+            "Dangerosité des produits",
+            "Stockage",
+            "Volume utilisé et mode d'utilisation",
+            "Emissions de substances toxiques"        
+      ],
+      "maitrise": 
+          {
+              "technique":[
+                "Aspiration au poste",
+                "Bacs de rétention",
+                "EPI (gants nitriles, lunettes…)",
+                "Douche de sécurité / Rince-œil"
+              ],
+              "organisationnel":[
+                "Mode opératoire",
+                "Fiches de données sécurité",
+                "Fiches utilisateurs",
+                "Règles de stockage",
+                "Quantité minimum nécessaire au poste"
+              ],
+              "humain":[
+                  "Formation Risque Chimique"
+              ]
+          }
+    },
+    {
+        "index": "1",
+        "id":"3",
+        "name": "Risque lié à l'électricité",
+        "vigilance": [
+            
+            "Etat des équipements électriques",
+            "Habilitation des personnes",
+            "Armoires électriques fermées"      
+        ],
+        "maitrise": 
+            {
+                "technique":[
+                  "Armoires élec fermées à clé",
+                  "Cadenas et outils de consignation",
+                  "EPI (risque électrique)"
+                ],
+                "organisationnel":[
+                  "Vérification des installations électriques"
+                ],
+                "humain":[
+                    "Habilitations nécessaires"
+                ]
+            }
+        
+      },
+      {
+        "index": "2",
+        "id":"14",
+        "name": "Risque incendie / explosion",
+        "vigilance": [
+            
+            "Utilisation de produits inflammables ou équipements/activités avec risque d'incendie",
+            "Stockage de produits ou matières inflammables"     
+        ],
+        "maitrise": 
+            {
+                "technique":[
+                  "Moyens de protection (RIA, Extincteurs)",
+                  "Supression des matériaux combustibles",
+                  "Produits inflammables dans des contenants sécurisés"
+                ],
+                "organisationnel":[
+                  "Contrôle / Procédure Permis Feu",
+                  "Guide-fil / Serre-fil",
+                  "Eloignement des sources d'ignition",
+                  "Réduction des quantités au poste"
+                ],
+                "humain":[
+                    "Sensibilisation",
+                    "Exercice d'évacuation régulier"
+                ]
+            }
+        
+      },
+      {
+        "index": "3",
+        "id":"2",
+        "name": "Risque lié aux ambiances physiques",
+        "vigilance": [
+            
+            "Niveau d'éclairement",
+            "Perturbation de l'éclairage (reflet, zone d'ombre)",
+            "Température ambiante"     
+        ],
+        "maitrise": 
+            {
+                "technique":[
+                  "Eclairage suffisant",
+                  "Vêtements chauds, chauffage",
+                  "Climatisation, fontaine à eau"
+                ],
+                "organisationnel":[
+                  "Maintenance des équipements"
+                ],
+                "humain":[
+                    "Sensibilisation"
+                ]
+            }
+        
+      },
+      {
+        "index": "4",
+        "id":"22",
+        "name": "Risque de chute de plain-pied",
+        "vigilance": [
+            
+            "Zone de passage, fréquentée",
+            "Etat des sols (encombrements, dégradation)",
+            "Passages étroits"
+        ],
+        "maitrise": 
+            {
+                "technique":[
+                  "Sol plan et non dégradé",
+                  "Passages non encombrés",
+                  "Gilet fluorescent"
+                ],
+                "organisationnel":[
+                  "Zoning / Allées piétonnes identifiées"
+                ],
+                "humain":[
+                    "Sensibilisation"
+                ]
+            }
+        
+      },
+      {
+        "index": "5",
+        "id":"8",
+        "name": "Risque de chute de hauteur",
+        "vigilance": [
+            
+            "Zones à plusieurs niveaux (escaliers, passerelles, fosse)",
+            "Equipements mobiles (échelle, escabeau, nacelle)",
+            "Type et durée de l'activité",
+            "Formation du personnel"
+        ],
+        "maitrise": 
+            {
+                "technique":[
+                  "Sol plan et non dégradé",
+                  "Passages non encombrés",
+                  "Gilet fluorescent"
+                ],
+                "organisationnel":[
+                  "Zoning / Allées piétonnes identifiées"
+                ],
+                "humain":[
+                    "Sensibilisation"
+                ]
+            }
+        
+      },
+      {
+        "index": "6",
+        "id":"7",
+        "name": "Risque lié aux circulations internes",
+        "vigilance": [
+            "Lieu de passage, croisement avec des engins" ,
+            "Etat du sol (encombrement, fluide sur le sol…)"
+        ],
+        "maitrise": 
+            {
+                "technique":[
+                  "Sol plan et non dégradé",
+                  "Séparation des flux (véhicules/piétons)",
+                  "Gilet fluorescent",
+                  "Respect des vitesses / Panneaux STOP"
+                ],
+                "organisationnel":[
+                  "Zoning / Allées identifiées",
+                  "Allées propres et dégagées",
+                  "Plan de circulation"
+                ],
+                "humain":[
+                    "Sensibilisation (intégration HSE)",
+                    "Formation Conduite Interne"
+                ]
+            }
+        
+      },
+      {
+        "index": "7",
+        "id":"24",
+        "name": "Risque lié à la coactivité",
+        "vigilance": [
+            "Coactivité entre plusieurs activités différentes sur un même espace (engins, travaux, entreprises extérieures)"
+        ],
+        "maitrise": 
+            {
+                "technique":[
+                  "EPI (selon la tâche)",
+                  "Balisage des zones de travail"
+                ],
+                "organisationnel":[
+                  "Plan de prévention"
+                ],
+                "humain":[
+                    "Sensibilisation/Consignes HSE"
+                ]
+            }
+        
+      },
+      {
+        "index": "8",
+        "id":"12",
+        "name": "Risque lié aux chutes d'objet",
+        "vigilance": [
+            "Zone de stockage en hauteur",
+            "Hauteur de stockage",
+            "Poids et stabilité de la charge"
+        ],
+        "maitrise": 
+            {
+                "technique":[
+                  "EPI (gants, lunettes)",
+                  "Protection des palletiers"
+                ],
+                "organisationnel":[
+                  "Contrôle des palletiers",
+                  "Restriction d'accès",
+                  "Zoning",
+                  "Respect des charges/hauteurs de stockage"
+                ],
+                "humain":[
+                    "Formation conduite d'engins"
+                ]
+            }
+        
+      },
+      {
+        "index": "9",
+        "id":"4",
+        "name": "Risque lié aux équipements de travail",
+        "vigilance": [
+            "Etat des équipements",
+            "Organe en mouvement",
+            "Dangerosité des équipements (coupures, écrasements…)"
+        ],
+        "maitrise": 
+            {
+                "technique":[
+                  "Systèmes de sécurité actifs (carters, barrières immatérielles, scrutateurs)",
+                  "Outils de consignation (maintenance)",
+                  "EPI (gants anti-coupures, manchettes)",
+                  "Outils conformes et en bon état"
+                ],
+                "organisationnel":[
+                  "Réalisation des OK Démarrage",
+                  "Cartographie consignation (maintenance)",
+                  "Procédure Kit MR10",
+                  "Zone de pincement en rouge et zone de préhension en vert"
+                ],
+                "humain":[
+                    "Formation au poste",
+                    "Formation Consignation"
+                ]
+            }
+        
+      },
+      {
+        "index": "10",
+        "id":"9",
+        "name": "Risque lié à la manutention mécanique (engins...)",
+        "vigilance": [
+            "Appareils de levage/manutention (chariots, transpalettes)",
+            "Equipements de levage (sangles)",
+            "Caractéristiques de la charge",
+            "Adéquation de l'équipement avec la charge",
+            "Formation"
+        ],
+        "maitrise": 
+            {
+                "technique":[
+                  "EPI (Gilet fluorescent)"
+                ],
+                "organisationnel":[
+                  "Contrôle des engins (OK Démarrage)",
+                  "Procédure de levage (charges adéquates)",
+                  "Balisage de la zone de travail"
+                ],
+                "humain":[
+                    "CACES",
+                    "Habilation"
+                ]
+            }
+        
+      },
+      {
+        "index": "11",
+        "id":"21",
+        "name": "Risque lié aux projections, fluides sous pression",
+        "vigilance": [
+            "Fluides sous pression (air, eau…)",
+            "Zone de projection",
+            "Etat des équipements (vannes, conduites)"
+        ],
+        "maitrise": 
+            {
+                "technique":[
+                  "EPI (lunettes, gants)",
+                  "Système anti coup de fouet",
+                  "Matériel de consignation (maintenance)"
+                ],
+                "organisationnel":[
+                  "Contrôles", 
+                  "Cartographie de consignation",
+                  "Instruction de travail"
+                ],
+                "humain":[
+                    "Formation Consignation",
+                    "Habilitations"
+                ]
+            }
+        
+      },
+      {
+        "index": "12",
+        "id":"5",
+        "name": "Risque lié au bruit",
+        "vigilance": [
+            "Niveau sonore d'un équipement ou d'une zone de travail"
+        ],
+        "maitrise": 
+            {
+                "technique":[
+                  "EPI (bouchons d'oreille)"
+                ],
+                "organisationnel":[],
+                "humain":[
+                    "Sensibilisation"
+                ]
+            }
+        
+      },
+      {
+        "index": "13",
+        "id":"20",
+        "name": "Risque lié aux vibrations",
+        "vigilance": [
+            "Sources vibratoires (chariots, outillage portatif...)"
+        ],
+        "maitrise": 
+            {
+                "technique":[
+                  "Systèmes d'amortissement",
+                  "Poignée anti-vibratoire",
+                  "Etat des sols"
+                ],
+                "organisationnel":[
+                  "Systèmes d'amortissement",
+                  "Poignée anti-vibratoire",
+                  "Etat des sols"
+                ],
+                "humain":[
+                    "Formation au poste"
+                ]
+            }
+        
+      },
+      {
+        "index": "14",
+        "id":"23",
+        "name": "Risque psycho-sociaux (RPS)",
+        "vigilance": [
+            "Répétitivité, cadence",
+            "Relation professionnels",
+            "Contraintes temporelles"
+        ],
+        "maitrise": [
+            {
+                "technique":[
+                  ],
+                "organisationnel":[
+                  "Organisation du temps de travail",
+                  "Entretien individuel"
+                ],
+                "humain":[
+                ]
+            }
+        ]
+      },
+      {
+        "index": "15",
+        "id":"1",
+        "name": "Risque lié à l'activité physique (Postures, manutentions manuelles ...)",
+        "vigilance": [
+            "Port ou transfert de charge (poids, tonnage)",
+            "Hauteur de pose et dépose",
+            "Caractéristique de la charge (type de prise)",
+            "Fréquence, répétition des mouvements",
+            "Contraintes posturales"
+        ],
+        "maitrise": 
+            {
+                "technique":[
+                  "Moyens de manutention",
+                  "Tapis anti-fatigue",
+                  "Equipement adapté à l'homme"
+                ],
+                "organisationnel":[
+                  "Echauffements",
+                  "Poste de travail aménagé"
+                ],
+                "humain":[
+                    "Formation au poste",
+                    "Formation Gestes et Postures",
+                    "Formation Ergonomie"
+                ]
+            }
+        
+      },
+      {
+        "index": "16",
+        "id":"30",
+        "name": "Risque d'impact environnementaux",
+        "vigilance": [
+            "Dégagement de polluants dans l'air (Cov, CO2…)",
+            "Pollution de l'eau (rejets eaux usées, déversement…)",
+            "Pollution des sols (déversement…)",
+            "Consommations d'énergie",
+            "Production de déchets",
+            "Nuisances vis-à-vis du voisinnage (bruit, odeur…)"
+        ],
+        "maitrise": 
+            {
+                "technique":[
+                  "Rétentions + Détecteur de rétention",
+                  "Kit anti-pollution",
+                  "Kit MR10",
+                  "Sécurisation des process",
+                  "Réduction à la source",
+                  "Tri + Valorisation des déchets"
+                ],
+                "organisationnel":[
+                  "Procédure Pollution Kit MR10",
+                  "Rangement des stockages extérieurs",
+                  "Gestion organisée des déchets"
+                ],
+                "humain":[
+                    "Sensibilisation",
+                    "Communication"
+                ]
+            }
+        
+      }
+    ]
+  }

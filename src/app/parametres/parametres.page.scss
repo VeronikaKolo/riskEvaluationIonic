@@ -1,0 +1,50 @@
+
+ion-content
+{
+    --ion-background-color:black;
+}
+img{
+
+  width: 175px;
+  margin-top: 6em;
+  margin-left: 13em;
+  
+}
+ion-button{
+  width: 150px;
+  height: 100px;
+  
+  --background:#82E0AA;
+}
+#buttons{
+  margin-top: 75px;
+  margin-left: 8em;
+}
+ion-icon{
+  width: 100px;
+  height: 75px;
+  color: rgb(15, 15, 15);
+}
+ion-title{
+   color: #58D68D;
+   font-size: 50px;
+  font-family:Candara;
+  font-weight: bold;
+  text-align: center;
+
+}
+
+label {
+  font-size: 12px;
+  white-space: nowrap;
+  font-weight: bold;
+  display: block;
+  color: rgb(8, 8, 8);
+  
+}
+#back
+{
+ --background: aliceblue;
+ width: 50px;
+ height: 40px;
+}
