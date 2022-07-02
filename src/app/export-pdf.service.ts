@@ -25,22 +25,17 @@ console.log(data);
      pageSize:'A2',
      pageOrientation: 'landscape',
      content: [
-       {
-         style: 'tableExample',
-         table: {
-           body: [
-             ['Nom du poste','Secteur', 'Nombre de personnes concernées', 'Participants à l\'évalusation des risques'],
-             [data.name,data.secteur, data.number, this.personnes(data)]
-           ]
-         }
-       },
+      {text:'EVALUATION DES RISQUES', style:'header'},
+    this.buildTableHeader(data),
+    this.buildSubTableHeader(),
     this.buildTable(data)
      
          
      ],
      styles: {
        header: {
-         fontSize: 18,
+         fontSize: 30,
+         fillColor:'yellow',
          bold: true,
          margin: [0, 0, 0, 10]
        },
@@ -54,19 +49,24 @@ console.log(data);
        },
        tableHeader: {
          bold: true,
-         fontSize: 13,
-         color: 'black'
+         fontSize: 16,
+         color: 'black',
+         margin: [0, 0, 30, 0]
        },
            cell:{
                fillColor: '#F9E79F',
-           }
+               width: 20
+           },
+        red:{
+          color: 'red',
+        }
      },
      defaultStyle: {
        // alignment: 'justify'
      }
      
    }
-   //this.pdfObj = pdfMake.createPdf(docDef).download();
+   this.pdfObj = pdfMake.createPdf(docDef).download();
    this.pdfObj= pdfMake.createPdf(docDef)
    this.pdfObj.getBase64( async(data) => {
     var pdfBase64 = data;
@@ -88,77 +88,100 @@ console.log(data);
     }
   });
  }
-  buildTable(data: any) {
+  buildSubTableHeader() {
     var body = [];
-
+  
     body.push([
-    { text:'Risque' ,style:'cell'},
                   { text:'N°' ,style:'cell'},
+                  { text:'Risque' ,style:'cell'},
                   { text:'Mode de travail',style:'cell'},
                   { text:'Description succinte de la tâche, procédé, installation',style:'cell'},
                   { text:'Dommages HSE',style:'cell'},
-                  { text:'Estimation du risque',style:'cell'},
-                  { text:'Les moyens de maîtrise sont-ils suffisants ?',style:'cell'},
-                  { text:'Si les moyens de maitrise sont jugés insuffisants, on pondère les MM ?',style:'cell'},
-                  { text:'Si non, actions correctives',style:'cell'},
-                  { text:'Catégorie',style:'cell'},
+                  { text:'Estimation du risque',style:'cell',colSpan: 3},{},{},
+                  { text:'MAITRISE du risque HSE, Mesure de prévention existante',style:'cell',colSpan: 4},{},{},{},
+                  { text:'Les moyens de maîtrise sont-ils suffisants ?',style:'cell',colSpan:4},{},{},{},
+                  { text:'Si non, actions correctives',style:'cell'}]);
+                  return {
+                    table: {
+                      widths: [40,150,75,250,100,75,75,40,75,85,75,45,45,45,45,45,100],
+                        headerRows: 1,
+                        body: body
+                    }
+                };
+  }
+  buildTableHeader(data: any) {
+    var body = [];
+    let d = new Date();
+    let date = d.getDate() + '/' + d.getMonth() + '/' + d.getFullYear();
+   body.push([
+    {text:'DATE:', style:'tableHeader'},
+    {text: date , style:'tableHeader'},
+    {text: 'PILOTES: \n' + this.personnes(data), style:'tableHeader'},
+    {text: 'POSTE', style:'tableHeader'},
+    {text: data.name, style:'tableHeader'},
+   ])
+   return {
+    table: {
+        headerRows: 1,
+        widths: [150,150,150,150,793],
+        body: body
+    }
+};
+
+  }
+  buildTable(data: any) {
+    var body = [];
+  
+   
+                  body.push([
                   { text:'Numéro lié au DUERP',style:'cell'},
-                  { text:'N : Normal D : Dégradé M : Maintenance',style:'cell'},
+                  { text:'Catégorie',style:'cell'},
+                  { text:'N : Normal \n D : Dégradé \n M : Maintenance',style:'cell'},
                   { text:'Décrire la tâche prescrite, de l\'activité',style:'cell'},
-                  { text:'Type de blessure ou atteinte à l\'environnement (douleur, fracture,pollution, brulure…) ',style:'cell'},
-                  { text:'Fréquence Comptage ',style:'cell'},
+                  { text:'Type de blessure ou atteinte à l\'environnement',style:'cell'},
                   { text:'Fréquence',style:'cell'},
                   { text:'Gravité',style:'cell'},
-                  { text:'Gravité comptage',style:'cell'},
-                  { text:'Moyens de maîtrise technique',style:'cell'},
-                  { text:'Moyens de maîtrise organisationnel',style:'cell'},
-                  { text:'Moyens de maîtrise humain',style:'cell'},
-                  { text:'Maitrise du risque',style:'cell'},
+                  { text:'Risque brut',style:'cell'},
+                  { text:'Technique',style:'cell'},
+                  { text:'Organisationnel',style:'cell'},
+                  { text:'Humain',style:'cell'},
+                  { text:'Maitrise',style:'cell'},
                   { text:'Risque résiduel',style:'cell'},
                   { text:'OUI / NON',style:'cell'},
                   { text:'MM pondéré',style:'cell'},
                   { text:'Risque pondéré',style:'cell'},
                   { text:'Actions correctives',style:'cell'}]);
-            
-
+  
+         
                   for(var i=0;i<data.risks.length;i++)
                   {
                    var risk=data.risks[i];
                    console.log(risk)
                     body.push([ 
+                      {text: risk.id},
                      {text: risk.name}, 
-                     {text: risk.id},
                      {text:risk.work},
                     {text:risk.description},
                      {text:risk.dommage},
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     '',
-                     {text:risk.vigilance},
-                     '',
-                     '',
                      {text:risk.frequency.name},
-                     {text:risk.frequency.value},
                      {text:risk.gravity.name},
-                     {text:risk.gravity.value},
+                     {text:risk.gravity.value*risk.frequency.value},
                      {text:risk.maitrise.technique},
                      {text:risk.maitrise.organisationnel},
                      {text:risk.maitrise.humain},
+                     {text:risk.calculateMaitrise},
                      {text:risk.maitrisenumber},
+                     {text:risk.maitrisechoice},
                      '',
                      '',
-                     '',
-                     '',
-                     ''
+                     {text:risk.action , style:'red'},
                    ]);
                
                   }
                   return {
                     table: {
                         headerRows: 1,
+                        widths: [40,150,75,250,100,75,75,40,75,85,75,45,45,45,45,45,100],
                         body: body
                     }
                 };

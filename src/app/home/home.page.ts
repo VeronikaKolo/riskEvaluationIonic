@@ -47,7 +47,10 @@ export class HomePage {
       humain: [],
       autre: []
     },
-    maitrisenumber:0
+    maitrisenumber:0,
+    calculateMaitriseNb:0,
+    action:'',
+    maitrisechoice:''
   }
   index: any;
 
@@ -95,6 +98,11 @@ export class HomePage {
       ],
       buttons: [
         {
+          text: 'Annuler',
+          handler: async (data) => {
+          }
+        },
+        {
           text: 'Suivant',
           handler: async (data) => {
             this.site.name = data.name;
@@ -103,6 +111,7 @@ export class HomePage {
             this.addPerson();
           }
         }
+        
       ]
     });
 
@@ -176,7 +185,6 @@ export class HomePage {
 
   async alertPoints() {
     var message = "";
-    console.log(this.index);
     for (var i = 0; i < this.risk[this.index].vigilance.length; i++) {
       message += "-" + this.risk[this.index].vigilance[i] + "<br><br>"
     }
@@ -185,13 +193,6 @@ export class HomePage {
       header: 'Points de vigilance',
       backdropDismiss: false,
       message: message,
-      inputs: [
-        {
-          name: 'description',
-          type: 'text',
-          placeholder: 'Description succinte de la tâche, procédé, installation ',
-        },
-      ],
       buttons: [
         {
           text: 'Retour',
@@ -202,15 +203,47 @@ export class HomePage {
         }, {
           text: 'Ok',
           handler: async(data) => {
-            this.currentRisk.description=data;
-            console.log(this.currentRisk);
-            this.presentAlertDommage();
+            this.alertDescription();
           }
         }
       ]
     });
 
     await alert.present();
+  }
+  async alertDescription()
+  {
+    let alert = await this.alert.create({
+      header: 'Description succinte de la tâche, procédé, installation',
+      backdropDismiss: false,
+      inputs: [
+        {
+          name: 'description',
+          type: 'text',
+          placeholder: '',
+        },
+      ],
+      buttons: [
+        {
+          text: 'Retour',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            this.alertPoints();
+          }
+        },
+        {
+          text:'Suivant',
+          role: 'ok',
+          cssClass: 'secondary',
+          handler: async (data) => {
+            this.currentRisk.description=data.description;
+            this.presentAlertDommage();
+          }
+        }   
+      ]
+    });
+    
+    alert.present();
   }
   async presentAlertDommage() {
 
@@ -285,12 +318,11 @@ export class HomePage {
           text: 'Retour',
           cssClass: 'secondary',
           handler: (blah) => {
-            this.alertPoints();
+            this.alertDescription();
           }
         },{
           text: 'Ok',
           handler: async (data) => {
-            console.log(data);
             this.currentRisk.dommage = data;
             this.DommagesAsk();
 
@@ -390,7 +422,6 @@ export class HomePage {
           text: 'Ok',
           handler: (data) => {
             this.currentRisk.maitrise.technique = data;
-            console.log( this.currentRisk.maitrise.technique);
             this.askMaitriceTechniqueAutre();
           }
         }
@@ -425,7 +456,6 @@ export class HomePage {
           text: 'Ok',
           handler: (data) => {
             this.currentRisk.maitrise.technique = data;
-            console.log( this.currentRisk.maitrise.technique);
             this.alertOrganisationnel();
           }
         }
@@ -506,6 +536,8 @@ export class HomePage {
     await alert.present();
   }
   async presentMaitrise() {
+    this.risk.calculateMaitriseNb=this.calculateMaitrise();
+    console.log(this.calculateMaitrise);
     this.risk.maitrisenumber = this.calculateMaitrise() * this.currentRisk.frequency.value * this.currentRisk.gravity.value;
 
               this.site.risks.push(this.currentRisk);
@@ -534,7 +566,10 @@ export class HomePage {
                   humain: [],
                   autre: []
                 },
-                maitrisenumber:0
+                maitrisenumber:0,
+                calculateMaitriseNb:0,
+                action:'',
+                maitrisechoice:''
               }
               this.currentRisk = newcurrentRisk;
               this.presentOption();
@@ -645,7 +680,6 @@ export class HomePage {
     if (localStorage.getItem('listofsite') != null) {
       siteList = JSON.parse(localStorage.getItem('listofsite'));
     }
-    console.log(this.site);
     siteList.push(this.site);
     localStorage.setItem('listofsite', JSON.stringify(siteList));
 
@@ -710,7 +744,6 @@ export class HomePage {
           role: 'ok',
           cssClass: 'secondary',
           handler: async (data) => {
-            console.log(data);
             if(data==="oui")
               this.presentDommagesAutres()
             else
@@ -738,7 +771,7 @@ export class HomePage {
         {
           text: 'Suivant',
           handler: async (data) => {
-            this.currentRisk.maitrise.technique.push(data);
+            this.currentRisk.maitrise.technique.push(data.techniqueautres);
             this.alertOrganisationnel();
           }
         }
@@ -774,7 +807,6 @@ export class HomePage {
           role: 'ok',
           cssClass: 'secondary',
           handler: async (data) => {
-            console.log(data);
             if(data==="oui")
               this.presentMaitriceTechniqueAutre();
             else
@@ -809,7 +841,7 @@ export class HomePage {
          {
           text: 'Suivant',
           handler: async (data) => {
-            this.currentRisk.maitrise.organisationnel.push(data);
+            this.currentRisk.maitrise.organisationnel.push(data.organisationelleeautres);
             this.alertHumain();
           }
         }
@@ -865,8 +897,8 @@ export class HomePage {
        {
           text: 'Suivant',
           handler: async (data) => {
-            this.currentRisk.maitrise.humain.push(data);
-            this.presentMaitrise();
+            this.currentRisk.maitrise.humain.push(data.Humaineautres);
+            this.askMaitriseSuffisante();
           }
         }
       ]
@@ -904,7 +936,7 @@ export class HomePage {
             if(data==="oui")
             this.presentMaitriceHumainAutre();
             else
-            this.presentMaitrise();
+            this.askMaitriseSuffisante();
             
           }
         }   
@@ -912,6 +944,80 @@ export class HomePage {
     });
     
      
+    alert.present();
+  }
+
+  async askMaitriseSuffisante()
+  {
+    let alert = await this.alert.create({
+      header: 'Les moyens de maîtrise sont-ils suffisants ?',
+      backdropDismiss: false,
+      inputs: [
+        {
+          name: 'Oui',
+          type: 'radio',
+          value:"oui",
+          label: "Oui",
+
+        },
+        {
+          name: 'Non',
+          label: "Non",
+          type: 'radio',
+          value:"non",
+          checked:true
+        },
+      ],
+      buttons: [
+        {
+          text:'Suivant',
+          role: 'ok',
+          cssClass: 'secondary',
+          handler: async (data) => {
+            
+            this.currentRisk.maitrisechoice=data;
+            if(data==="oui")
+              this.alertActionsCorrectives();
+            else
+              this.presentMaitrise();
+          }
+        }   
+      ]
+    });
+    
+    alert.present();
+  }
+  async alertActionsCorrectives() {
+    let alert = await this.alert.create({
+      header: 'Actions correctives',
+      backdropDismiss: false,
+      inputs: [
+        {
+          name: 'action',
+          type: 'text',
+          placeholder: '',
+        },
+      ],
+      buttons: [
+        {
+          text: 'Retour',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            this.alertPoints();
+          }
+        },
+        {
+          text:'Suivant',
+          role: 'ok',
+          cssClass: 'secondary',
+          handler: async (data) => {
+            this.currentRisk.action=data.action
+            this.presentAlertDommage();
+          }
+        }   
+      ]
+    });
+    
     alert.present();
   }
 }

@@ -32,6 +32,7 @@ export class CriticPage implements OnInit {
   dismissModal()
   {
     let data=this.risk;
+    
       this.modal.dismiss(data);    
   }
   back()

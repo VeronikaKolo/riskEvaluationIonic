@@ -42,7 +42,10 @@ export class SynthesePage implements OnInit {
       humain: [],
       autre: []
     },
-    maitrisenumber:0
+    maitrisenumber:0,
+    calculateMaitriseNb:0,
+    action :'',
+    maitrisechoice:''
   }
   riskArray:any;
   index: any;
@@ -103,6 +106,7 @@ getData() {
           handler:async (data) => {
             this.riskselected=false;
             this.data.risks = this.data.risks.filter(obj => obj !== this.risk);
+            this.save();
           }
         }
       ]
@@ -295,6 +299,8 @@ getData() {
     await alert.present();
   }
   async presentMaitrise() {
+    this.currentRisk.calculateMaitriseNb=this.calculateMaitrise();
+    console.log(this.calculateMaitrise);
     this.currentRisk.maitrisenumber = this.calculateMaitrise() * this.currentRisk.frequency.value * this.currentRisk.gravity.value;
 
               this.data.risks.push(this.currentRisk);
@@ -323,7 +329,10 @@ getData() {
                   humain: [],
                   autre: []
                 },
-                maitrisenumber:0,
+                maitrisenumber:0, 
+                calculateMaitriseNb:0,
+                action :'',
+                maitrisechoice:''
               }
               this.currentRisk = newcurrentRisk;
               this.presentOption();
@@ -485,7 +494,7 @@ getData() {
          {
           text: 'Suivant',
           handler: async (data) => {
-            this.currentRisk.maitrise.technique.push(data);
+            this.currentRisk.maitrise.technique.push(data.techniqueautres);
             this.alertOrganisationnel();
           }
         }
@@ -535,7 +544,7 @@ getData() {
          {
           text: 'Suivant',
           handler: async (data) => {
-            this.currentRisk.maitrise.organisationnel.push(data);
+            this.currentRisk.maitrise.organisationnel.push(data.organisationelleeautres);
             this.alertOrganisationnel();
           }
         }
@@ -570,7 +579,7 @@ getData() {
   }
   async presentMaitriceHumainAutre() {
     let alert = await this.alert.create({
-      header: 'Autre maîtrise organisationelle',
+      header: 'Autre maîtrise humain',
       cssClass: 'my-custom-class',
       backdropDismiss: false,
       inputs: [
@@ -582,10 +591,17 @@ getData() {
       ],
       buttons: [
         {
+          text: 'Retour',
+          cssClass: 'secondary',
+          handler: () => {
+            this.alertHumain();
+          },
+        },
+       {
           text: 'Suivant',
           handler: async (data) => {
-            this.currentRisk.maitrise.humain.push(data);
-            this.presentMaitrise();
+            this.currentRisk.maitrise.humain.push(data.Humaineautres);
+            this.askMaitriseSuffisante();
           }
         }
       ]
@@ -598,20 +614,110 @@ getData() {
     let alert = await this.alert.create({
       header: 'Autre maîtrise humain ?',
       backdropDismiss: false,
+      inputs: [
+        {
+          name: 'Oui',
+          type: 'radio',
+          value:"oui",
+          label: "Oui",
+
+        },
+        {
+          name: 'Non',
+          label: "Non",
+          type: 'radio',
+          value:"non",
+          checked:true
+        },
+      ],
       buttons: [
         {
-          text:'Non',
-          role: 'cancel',
+          text:'Suivant',
+          role: 'ok',
           cssClass: 'secondary',
-          handler: () => {
-            this.presentMaitrise();
-          }
-        }, {
-          text: 'Oui',
-          handler:async () => {
+          handler: async (data) => {
+            if(data==="oui")
             this.presentMaitriceHumainAutre();
+            else
+            this.askMaitriseSuffisante();
+            
           }
-        }
+        }   
+      ]
+    });
+    
+     
+    alert.present();
+  }
+
+  async askMaitriseSuffisante()
+  {
+    let alert = await this.alert.create({
+      header: 'Les moyens de maîtrise sont-ils suffisants ?',
+      backdropDismiss: false,
+      inputs: [
+        {
+          name: 'Oui',
+          type: 'radio',
+          value:"oui",
+          label: "Oui",
+
+        },
+        {
+          name: 'Non',
+          label: "Non",
+          type: 'radio',
+          value:"non",
+          checked:true
+        },
+      ],
+      buttons: [
+        {
+          text:'Suivant',
+          role: 'ok',
+          cssClass: 'secondary',
+          handler: async (data) => {
+            
+            this.currentRisk.maitrisechoice=data;
+            if(data==="oui")
+              this.alertActionsCorrectives();
+            else
+              this.presentMaitrise();
+          }
+        }   
+      ]
+    });
+    
+    alert.present();
+  }
+  async alertActionsCorrectives() {
+    let alert = await this.alert.create({
+      header: 'Actions correctives',
+      backdropDismiss: false,
+      inputs: [
+        {
+          name: 'action',
+          type: 'text',
+          placeholder: '',
+        },
+      ],
+      buttons: [
+        {
+          text: 'Retour',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            this.alertPoints();
+          }
+        },
+        {
+          text:'Suivant',
+          role: 'ok',
+          cssClass: 'secondary',
+          handler: async (data) => {
+            this.currentRisk.action=data.action
+            this.presentAlertDommage();
+          }
+        }   
       ]
     });
     
@@ -689,7 +795,7 @@ getData() {
           text: 'Ok',
           handler: async(data) => {
             this.currentRisk.description=data;
-            this.presentAlertDommage();
+            this.alertDescription();
           }
         }
       ]
@@ -770,7 +876,7 @@ getData() {
           text: 'Retour',
           cssClass: 'secondary',
           handler: (blah) => {
-            this.alertPoints();
+            this.alertDescription();
           }
         },
          {
@@ -815,9 +921,44 @@ getData() {
     if (localStorage.getItem('listofsite') != null) {
       siteList = JSON.parse(localStorage.getItem('listofsite'));
     }
-    siteList= siteList.filter(obj => obj !== this.data.risk.pop());
+
+    siteList= siteList.filter(obj => obj.name !== this.data.name);
     siteList.push(this.data);
     localStorage.setItem('listofsite', JSON.stringify(siteList));
 
+  }
+  async alertDescription()
+  {
+    let alert = await this.alert.create({
+      header: 'Description succinte de la tâche, procédé, installation',
+      backdropDismiss: false,
+      inputs: [
+        {
+          name: 'description',
+          type: 'text',
+          placeholder: '',
+        },
+      ],
+      buttons: [
+        {
+          text: 'Retour',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            this.alertPoints();
+          }
+        },
+        {
+          text:'Suivant',
+          role: 'ok',
+          cssClass: 'secondary',
+          handler: async (data) => {
+            this.currentRisk.description=data.description;
+            this.presentAlertDommage();
+          }
+        }   
+      ]
+    });
+    
+    alert.present();
   }
 }
