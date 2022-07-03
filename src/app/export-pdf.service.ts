@@ -172,8 +172,8 @@ console.log(data);
                      {text:risk.calculateMaitrise},
                      {text:risk.maitrisenumber},
                      {text:risk.maitrisechoice},
-                     '',
-                     '',
+                     {text: this.maitrisePondere(risk.maitrisepondere)},
+                     {text: this.riskPondere(risk.riskpondere)},
                      {text:risk.action , style:'red'},
                    ]);
                
@@ -198,5 +198,28 @@ console.log(data);
    return personne;
  }
 
-
+ riskPondere(maitriseponderee) {
+  if (maitriseponderee==0)
+    return '';
+  
+   return maitriseponderee;
+ }
+ maitrisePondere(maitriseponderee) {
+  if (maitriseponderee==0)
+    return '';
+  
+   return maitriseponderee;
+ }
+ 
+ 
+ formatText(textArray)
+ {
+   var text='';
+   for(var i=0;i<textArray.length-1;i++)
+   {
+     text += "- "+ textArray[i]+ '\n';
+   }
+   text += "- "+ textArray[i];
+ }
+ 
 }

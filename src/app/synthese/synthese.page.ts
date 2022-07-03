@@ -45,7 +45,9 @@ export class SynthesePage implements OnInit {
     maitrisenumber:0,
     calculateMaitriseNb:0,
     action :'',
-    maitrisechoice:''
+    maitrisechoice:'',
+    maitrisepondere:0,
+    riskpondere:0
   }
   riskArray:any;
   index: any;
@@ -332,38 +334,31 @@ getData() {
                 maitrisenumber:0, 
                 calculateMaitriseNb:0,
                 action :'',
-                maitrisechoice:''
+                maitrisechoice:'',
+                maitrisepondere:0,
+                riskpondere:0
               }
               this.currentRisk = newcurrentRisk;
               this.presentOption();
         
   }
   calculateMaitrise() {
-    if (this.currentRisk.maitrise.technique.length == 0 && this.currentRisk.maitrise.humain.length == 0 && this.currentRisk.maitrise.organisationnel.length == 0)
-      return 4;
+    let maitrise =4;
 
-    let matriseTechnique = true, maitriseOrganisation = true, maitriseHumain = true;
+    if(this.currentRisk.maitrise.technique.length > 0 ||this.risk[this.index].maitrise.technique.length != 0 )
+        --maitrise;
+    if(this.currentRisk.maitrise.organisationnel.length > 0 ||this.risk[this.index].maitrise.organisationnel.length != 0 )
+        --maitrise;
+    if(this.currentRisk.maitrise.humain.length > 0 ||this.risk[this.index].maitrise.humain.length != 0 )
+        --maitrise;
 
-
-    if (this.riskArray[this.index].maitrise.technique.length != 0) {
-      matriseTechnique = this.currentRisk.maitrise.technique.length > 0;
-    }
-    if (this.riskArray[this.index].maitrise.organisationnel.length != 0) {
-      maitriseOrganisation = this.currentRisk.maitrise.organisationnel.length > 0;
-    }
-    if (this.riskArray[this.index].maitrise.humain.length != 0) {
-      maitriseHumain = this.currentRisk.maitrise.humain.length > 0;
-    }
-
-    if (matriseTechnique && maitriseHumain && maitriseOrganisation)
-      return 1;
-    if (matriseTechnique && maitriseHumain || matriseTechnique && maitriseOrganisation || maitriseOrganisation && maitriseHumain) {
-      return 2;
-    }
-    if (maitriseHumain || matriseTechnique || maitriseOrganisation)
-      return 3;
+      return maitrise;
 
   }
+  calculateMaitrisePondere() {
+
+    return (this.currentRisk.maitrisenumber+1)*this.currentRisk.frequency.value * this.currentRisk.gravity.value;;
+}
   async presentOption() {
 
     const alert = await this.alert.create({

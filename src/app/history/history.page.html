@@ -11,7 +11,8 @@
 <ion-content>
   <div id="items" *ngFor="let site of siteList">
     <ion-item>
-      <button id="site" (click)= "displaySite(site)" >{{site.name}}</button>
+      <ion-button id="site" (click)= "displaySite(site)" >{{site.name}}</ion-button>
+      <ion-button id="site" (click)= "deleteSite(site)" > <ion-icon  id="icon" name="trash-outline"></ion-icon></ion-button>
     </ion-item>
     </div>
 </ion-content>

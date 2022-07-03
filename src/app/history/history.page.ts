@@ -26,4 +26,15 @@ displaySite(site)
  };
  this.navCtrl.navigateForward(['synthese'], navigationExtras);
 }
+deleteSite(site)
+{
+  var siteList = [];
+  if (localStorage.getItem('listofsite') != null) {
+    siteList = JSON.parse(localStorage.getItem('listofsite'));
+  }
+  siteList= siteList.filter(obj => obj.name !== site.name);
+  localStorage.setItem('listofsite', JSON.stringify(siteList));
+  this.siteList=siteList;
+  
+}
 }
