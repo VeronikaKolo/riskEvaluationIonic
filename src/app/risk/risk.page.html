@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+
+    <ion-button id='back' href="/parametres" >
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <ion-title>Risque</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding">
+    <ion-item  id="label">
+      <ion-label ><b>Général</b></ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label><b>Nom:</b></ion-label>
+      <ion-input type="text" placeholder="Nom du risque" [(ngModel)]="data.name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label><b>Numéro:</b></ion-label>
+      <ion-input type="number" placeholder="Numéro du risque" [(ngModel)]="data.id"></ion-input>
+    </ion-item>
+  <ion-item  id="label">
+    <ion-label><b>Moyens de maîtrise technique</b></ion-label>
+  </ion-item>
+  <div *ngFor="let point of data.maitrise.technique; let i=index">
+  <ion-item>
+    <ion-input [ngModel]="data.maitrise.technique[i]"></ion-input>
+    <ion-button (click)="deleteMoyenMaitrise('technique',data.maitrise.technique,data.maitrise.technique[i])">  <ion-icon  id="icon" name="trash-outline"></ion-icon></ion-button>
+  </ion-item>
+</div>
+<ion-item>
+  <ion-button (click)="addMoyenMaitriseTechnique()">+</ion-button>
+</ion-item>
+<ion-item  id="label">
+  <ion-label ><b>Moyens de maîtrise organisationnel</b></ion-label>
+</ion-item>
+<div *ngFor="let point of data.maitrise.organisationnel; let i=index">
+<ion-item>
+  <ion-input [ngModel]="data.maitrise.organisationnel[i]"></ion-input>
+  <ion-button (click)="deleteMoyenMaitrise('organisationnel',data.maitrise.organisationnel,data.maitrise.organisationnel[i])">  <ion-icon  id="icon" name="trash-outline"></ion-icon></ion-button>
+</ion-item>
+</div>
+<ion-item>
+  <ion-button (click)="addMoyenMaitriseOrganisationnel()" >+</ion-button>
+</ion-item>
+<ion-item id="label">
+  <ion-label ><b>Moyens de maîtrise humain</b></ion-label>
+</ion-item>
+<div *ngFor="let point of data.maitrise.humain; let i=index">
+<ion-item>
+<ion-input [ngModel]="data.maitrise.humain[i]"></ion-input>
+<ion-button (click)="deleteMoyenMaitrise('humain',data.maitrise.humain,data.maitrise.humain[i])">  <ion-icon  id="icon" name="trash-outline"></ion-icon></ion-button>
+</ion-item>
+</div>
+<ion-item>
+  <ion-button (click)="addMoyenMaitriseHumain()">+</ion-button>
+</ion-item>
+    <ion-button color="warning" expand="block" (click)="confirm()">VALIDER</ion-button>
+  </div>
+
+</ion-content>

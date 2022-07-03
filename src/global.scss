@@ -24,3 +24,40 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+.alert-radio-label.sc-ion-alert-md {
+    padding-left: 52px;
+    padding-right: 26px;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    flex: 1;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    white-space: pre-line;
+  }
+  .alert-checkbox-label.sc-ion-alert-md {
+    padding-left: 52px;
+    padding-right: 26px;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    flex: 1;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    white-space: pre-line;
+  }
+  .alert-wrapper.sc-ion-alert-md{
+  --background: #000000;
+  --width: 1000px;
+
+  }
+ 
+ion-content
+{
+    --ion-background-color:black;
+}
+ion-header
+{
+    --ion-background-color:black;
+}
+.action-sheet-button.sc-ion-action-sheet-md {
+  height: 60px !important;
+}

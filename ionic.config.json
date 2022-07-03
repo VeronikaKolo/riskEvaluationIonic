@@ -1,5 +1,7 @@
 {
   "name": "riskEvaluation",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    
+    <ion-button id='back' href="/home" >
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <ion-title id='titre'>Liste de sites</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="items" *ngFor="let site of siteList">
+    <ion-item>
+      <ion-button id="site" (click)= "displaySite(site)" >{{site.name}}</ion-button>
+      <ion-button id="site" (click)= "deleteSite(site)" > <ion-icon  id="icon" name="trash-outline"></ion-icon></ion-button>
+    </ion-item>
+    </div>
+</ion-content>

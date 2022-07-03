@@ -1,0 +1,30 @@
+
+<ion-header>
+  <ion-toolbar>
+    <ion-button  id='back' (click)="back()"> 
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <ion-title>
+      Participants à l'évaluation des risques
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-input type="text" placeholder="Nom Prénom" [(ngModel)]="name"></ion-input>
+  </ion-item>
+
+<ion-item><ion-label>Signature :</ion-label></ion-item>
+
+  <div class="signature-pad">
+    <div>
+      <canvas class="signature-pad-canvas" #canvas width="900" height="400" style="touch-action: none;"></canvas>
+    </div>
+  </div>
+  <ion-buttons>
+    <ion-button  [disabled]="isCanvasBlank()" (click)="save()"> Ajouter</ion-button>
+    <ion-button  (click)="next()"> Suivant</ion-button>
+    <ion-button  (click)="undo()"> Effacer</ion-button>
+  </ion-buttons>
+</ion-content>
