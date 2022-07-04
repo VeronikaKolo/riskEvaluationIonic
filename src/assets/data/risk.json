@@ -382,7 +382,7 @@
             "Relation professionnels",
             "Contraintes temporelles"
         ],
-        "maitrise": [
+        "maitrise": 
             {
                 "technique":[
                   ],
@@ -393,7 +393,7 @@
                 "humain":[
                 ]
             }
-        ]
+    
       },
       {
         "index": "15",
