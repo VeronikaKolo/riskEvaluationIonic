@@ -26,18 +26,18 @@ export class HomePage {
     id: 0,
     name: '',
     work: '',
-    dommage:'',
-    dommagesautres:'',
-    description:'',
+    dommage: [],
+    dommagesautres: '',
+    description: '',
     frequency:
     {
-      name:'',
-      value:1,
+      name: '',
+      value: 1,
     },
     gravity:
     {
-      name:'',
-      value:1,
+      name: '',
+      value: 1,
     },
     vigilance: [],
     maitrise:
@@ -47,12 +47,12 @@ export class HomePage {
       humain: [],
       autre: []
     },
-    maitrisenumber:0,
-    calculateMaitriseNb:0,
-    action:'',
-    maitrisechoice:'',
-    maitrisepondere:0,
-    riskpondere:0
+    maitrisenumber: 0,
+    calculateMaitriseNb: 0,
+    action: '',
+    maitrisechoice: '',
+    maitrisepondere: 0,
+    riskpondere: 0
   }
   index: any;
 
@@ -113,52 +113,11 @@ export class HomePage {
             this.addPerson();
           }
         }
-        
+
       ]
     });
 
     alert.present();
-  }
-  async presentWork() {
-
-    let alert = await this.alert.create({
-      header: 'Mode de travail',
-      backdropDismiss: false,
-      inputs: [
-        {
-          type: 'radio',
-          label: "Normal",
-          value: "Normal",
-        },
-        {
-          type: 'radio',
-          label: "Dégradé",
-          value: "Dégradé",
-        }, {
-          type: 'radio',
-          label: "Maintenance",
-          value: "Maintenance",
-        }
-      ],
-      cssClass: 'my-custom-class',
-      buttons: [
-        {
-          text: 'Retour',
-          cssClass: 'secondary',
-          handler: () => {
-            this.presentAlertRisks();
-          },
-        },{
-          text: 'Ok',
-          handler: async (data) => {
-            this.currentRisk.work = data;
-            this.alertPoints();
-          }
-        }
-      ]
-    });
-    alert.present();
-
   }
   async addPerson() {
 
@@ -171,12 +130,10 @@ export class HomePage {
     });
     modal.onDidDismiss()
       .then((data) => {
-        if(data['data'].personne==null)
-        {
+        if (data['data'].personne == null) {
           this.presentNew();
         }
-        else
-        {
+        else {
 
           this.site = data['data'];
           this.presentAlertRisks();
@@ -184,181 +141,6 @@ export class HomePage {
       });
     return await modal.present();
   }
-
-  async alertPoints() {
-    var message = "";
-    for (var i = 0; i < this.risk[this.index].vigilance.length; i++) {
-      message += "-" + this.risk[this.index].vigilance[i] + "<br><br>"
-    }
-    const alert = await this.alert.create({
-      cssClass: 'pointsClass',
-      header: 'Points de vigilance',
-      backdropDismiss: false,
-      message: message,
-      buttons: [
-        {
-          text: 'Retour',
-          cssClass: 'secondary',
-          handler: (blah) => {
-            this.presentWork();
-          }
-        }, {
-          text: 'Ok',
-          handler: async(data) => {
-            this.alertDescription();
-          }
-        }
-      ]
-    });
-
-    await alert.present();
-  }
-  async alertDescription()
-  {
-    let alert = await this.alert.create({
-      header: 'Description succinte de la tâche, procédé, installation',
-      backdropDismiss: false,
-      inputs: [
-        {
-          name: 'description',
-          type: 'text',
-          placeholder: '',
-        },
-      ],
-      buttons: [
-        {
-          text: 'Retour',
-          cssClass: 'secondary',
-          handler: (blah) => {
-            this.alertPoints();
-          }
-        },
-        {
-          text:'Suivant',
-          role: 'ok',
-          cssClass: 'secondary',
-          handler: async (data) => {
-            this.currentRisk.description=data.description;
-            this.presentAlertDommage();
-          }
-        }   
-      ]
-    });
-    
-    alert.present();
-  }
-  async presentAlertDommage() {
-
-    const alert = await this.alert.create({
-      cssClass: 'pointsClass',
-      header: 'Dommages HSE ',
-      backdropDismiss: false,
-      inputs: [
-        {
-          type: 'radio',
-          label: "Facture,Douleur,Blessure",
-          value: "Facture,Douleur,Blessure",
-        },
-        {
-          type: 'radio',
-          label: "Coupure, plaie, piqûre",
-          value: "Coupure, plaie, piqûre",
-        },
-        {
-          type: 'radio',
-          label: "Ecrasement, choc",
-          value: "Ecrasement, choc",
-        },
-        {
-          type: 'radio',
-          label: "Electrisation, éléctrocution",
-          value: "Electrisation, éléctrocution",
-        },
-        {
-          type: 'radio',
-          label: "Ecrasement",
-          value: "Ecrasement",
-        },
-        {
-          type: 'radio',
-          label: "Brûlure",
-          value: "Brûlure",
-        },
-        {
-          type: 'radio',
-          label: "Atteinte respiratoire",
-          value: "Atteinte respiratoire",
-        },
-        {
-          type: 'radio',
-          label: "Affections cutanées,oculaires",
-          value: "Affections cutanées,oculaires",
-        },
-        {
-          type: 'radio',
-          label: "Diminutions de l'acuité auditive,visuelle",
-          value: "Diminutions de l'acuité auditive,visuelle",
-        },
-        {
-          type: 'radio',
-          label: "Décès",
-          value: "Décès",
-        },
-        {
-          type: 'radio',
-          label: "Fatigue/Malaise",
-          value: "Fatigue/Malaise",
-        },
-        {
-          type: 'radio',
-          label: "Dégats matérielles",
-          value: "Fatigue/Malaise",
-        },
-      ],
-      buttons: [
-        {
-          text: 'Retour',
-          cssClass: 'secondary',
-          handler: (blah) => {
-            this.alertDescription();
-          }
-        },{
-          text: 'Ok',
-          handler: async (data) => {
-            this.currentRisk.dommage = data;
-            this.DommagesAsk();
-
-          }
-        }
-      ]
-    });
-
-    await alert.present();
-  }
-  async presentAlertCritic() {
-    const modal = await this.modalController.create({
-      component: CriticPage,
-      cssClass: 'my-custom-class',
-      componentProps: {
-        risk: this.currentRisk
-      }
-    });
-    modal.onDidDismiss()
-      .then((data) => {
-        if(data['data']==null)
-        {
-          this.presentAlertDommage();
-        }
-        else
-          {       
-          this.currentRisk = data['data'];
-          this.alertMaitrise();
-        }
-      });
-
-    return await modal.present();
-  }
-
   async presentAlertRisks() {
     let radio_options = [];
     for (let i = 0; i < this.risk.length; ++i) {
@@ -389,13 +171,338 @@ export class HomePage {
               this.currentRisk.id = this.risk[data].id;
               this.currentRisk.name = this.risk[data].name
               this.currentRisk.vigilance = this.risk[this.index].vigilance
-              this.presentWork();
+              this.alertPoints();
             }
           }
         ]
       });
       alert.present();
     });
+  }
+
+  async presentWork() {
+
+    let alert = await this.alert.create({
+      header: 'Mode de travail',
+      backdropDismiss: false,
+      inputs: [
+        {
+          type: 'radio',
+          label: "Normal",
+          value: "Normal",
+        },
+        {
+          type: 'radio',
+          label: "Dégradé",
+          value: "Dégradé",
+        }, {
+          type: 'radio',
+          label: "Maintenance",
+          value: "Maintenance",
+        }
+      ],
+      cssClass: 'my-custom-class',
+      buttons: [
+        {
+          text: 'Retour',
+          cssClass: 'secondary',
+          handler: () => {
+            this.presentAlertRisks();
+          },
+        }, {
+          text: 'Ok',
+          handler: async (data) => {
+            this.currentRisk.work = data;
+            
+            this.alertDescription();
+          }
+        }
+      ]
+    });
+    alert.present();
+
+  }
+
+
+  async alertPoints() {
+    var message = "";
+    for (var i = 0; i < this.risk[this.index].vigilance.length; i++) {
+      message += "-" + this.risk[this.index].vigilance[i] + "<br><br>"
+    }
+    const alert = await this.alert.create({
+      cssClass: 'pointsClass',
+      header: 'Points de vigilance',
+      backdropDismiss: false,
+      message: message,
+      buttons: [
+        {
+          text: 'Retour',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            this.presentAlertRisks();
+          }
+        }, {
+          text: 'Ok',
+          handler: async (data) => {
+            this.presentWork();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+  async alertDescription() {
+    let alert = await this.alert.create({
+      header: 'Description succinte de la tâche, procédé, installation',
+      backdropDismiss: false,
+      inputs: [
+        {
+          name: 'description',
+          type: 'text',
+          placeholder: '',
+        },
+      ],
+      buttons: [
+        {
+          text: 'Retour',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            this.alertPoints();
+          }
+        },
+        {
+          text: 'Suivant',
+          role: 'ok',
+          cssClass: 'secondary',
+          handler: async (data) => {
+            this.currentRisk.description = data.description;
+            this.presentAlertDommage();
+          }
+        }
+      ]
+    });
+
+    alert.present();
+  }
+  async presentAlertDommage() {
+
+    const alert = await this.alert.create({
+      cssClass: 'pointsClass',
+      header: 'Dommages HSE ',
+      backdropDismiss: false,
+      inputs: [
+        {
+          type: 'checkbox',
+          label: "Blessures multiples, Fracture, Entorse",
+          value: "Blessures multiples, Fracture, Entorse",
+        },
+        {
+          type: 'checkbox',
+          label: "Coupure, Piqûre, Brûlure",
+          value: "Coupure, Piqûre, Brûlure",
+        },
+        {
+          type: 'checkbox',
+          label: "TMS Lombalgie, Douleur",
+          value: "TMS Lombalgie, Douleur",
+        },
+        {
+          type: 'checkbox',
+          label: "Choc, Heurt",
+          value: "Choc, Heurt",
+        },
+        {
+          type: 'checkbox',
+          label: "Ecrasement, Entraînement",
+          value: "Ecrasement, Entraînement",
+        },
+        {
+          type: 'checkbox',
+          label: "Incendie",
+          value: "Incendie",
+        },
+        {
+          type: 'checkbox',
+          label: "Electrisation, Eléctrocution",
+          value: "Electrisation, Eléctrocution",
+        },
+        {
+          type: 'checkbox',
+          label: "Atteinte respiratoire",
+          value: "Atteinte respiratoire",
+        },
+        {
+          type: 'checkbox',
+          label: "Atteinte cutanées,occulaires",
+          value: "Atteinte cutanées,occulaires",
+        },
+        {
+          type: 'checkbox',
+          label: "Diminutions de l'acuité auditive, visuelle",
+          value: "Diminutions de l'acuité auditive, visuelle",
+        },
+        {
+          type: 'checkbox',
+          label: "Décès",
+          value: "Décès",
+        },
+        {
+          type: 'checkbox',
+          label: "Fatigue/Malaise",
+          value: "Fatigue/Malaise",
+        },
+      ],
+      buttons: [
+        {
+          text: 'Retour',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            this.alertDescription();
+          }
+        }, {
+          text: 'Ok',
+          handler: async (data) => {
+            this.currentRisk.dommage = data;
+            this.DommagesAsk();
+
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async DommagesAsk() {
+    let alert = await this.alert.create({
+      header: 'Autres dommages HSE ?',
+      backdropDismiss: false,
+      inputs: [
+        {
+          name: 'Oui',
+          type: 'radio',
+          value: "oui",
+          label: "Oui",
+
+        },
+        {
+          name: 'Non',
+          label: "Non",
+          type: 'radio',
+          value: "non",
+          checked: true
+        },
+      ],
+      buttons: [
+        {
+          text: 'Suivant',
+          role: 'ok',
+          cssClass: 'secondary',
+          handler: async (data) => {
+            if (data === "oui")
+              this.presentDommagesAutres()
+            else
+              this.presentAlertCritic();
+          }
+        }
+      ]
+    });
+
+    alert.present();
+  }
+  async presentDommagesAutres() {
+    let alert = await this.alert.create({
+      header: 'Autres dommages HSE',
+      cssClass: 'my-custom-class',
+      backdropDismiss: false,
+      inputs: [
+        {
+          name: 'dommagesautres',
+          type: 'text',
+          placeholder: ' ',
+        },
+      ],
+      buttons: [
+        {
+          text: 'Retour',
+          cssClass: 'secondary',
+          handler: () => {
+            this.presentAlertDommage();
+          },
+        },
+        {
+          text: 'Suivant',
+          handler: async (data) => {
+            this.currentRisk.dommagesautres = data;
+            this.presentAlertCritic();
+          }
+        }
+      ]
+    });
+
+    alert.present();
+  }
+  async presentAlertCritic() {
+    const modal = await this.modalController.create({
+      component: CriticPage,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        risk: this.currentRisk
+      }
+    });
+    modal.onDidDismiss()
+      .then((data) => {
+        if (data['data'] == null) {
+          this.presentAlertDommage();
+        }
+        else {
+          this.currentRisk = data['data'];
+          this.alertMaitrise();
+        }
+      });
+
+    return await modal.present();
+  }
+  alertMaitrise() {
+    if (this.risk[this.index].maitrise.technique.length != 0) {
+      this.alertTechnique();
+    }
+    else {
+      if (this.risk[this.index].maitrise.organisationnel.length != 0) {
+        this.alertOrganisationnel();
+      }
+      else {
+        this.alertHumain();
+
+      }
+    }
+  }
+
+  async presentMaitriceTechniqueAutre() {
+    let alert = await this.alert.create({
+      header: 'Autre maîtrise technique',
+      cssClass: 'my-custom-class',
+      backdropDismiss: false,
+      inputs: [
+        {
+          name: 'techniqueautres',
+          type: 'text',
+          placeholder: ' ',
+        },
+      ],
+      buttons: [
+        {
+          text: 'Suivant',
+          handler: async (data) => {
+            this.currentRisk.maitrise.technique.push(data.techniqueautres);
+            this.alertOrganisationnel();
+          }
+        }
+      ]
+    });
+
+    alert.present();
   }
   async alertTechnique() {
     let options = [];
@@ -492,6 +599,7 @@ export class HomePage {
           text: 'Ok',
           handler: (data) => {
             this.currentRisk.maitrise.organisationnel = data;
+            console.log( this.currentRisk.maitrise.organisationnel );
             this.askMaitriceOrganisationelleAutre();
           }
         }
@@ -501,8 +609,8 @@ export class HomePage {
   }
   async alertHumain() {
     let options = [];
-    var i=0;
-    for ( i = 0; i < this.risk[this.index].maitrise.humain.length; ++i) {
+    var i = 0;
+    for (i = 0; i < this.risk[this.index].maitrise.humain.length; ++i) {
       options.push({
         type: 'checkbox',
         label: this.risk[this.index].maitrise.humain[i],
@@ -516,7 +624,7 @@ export class HomePage {
       backdropDismiss: false,
       header: 'Humain',
       inputs: options,
-      
+
       buttons: [
         {
           text: 'Retour',
@@ -525,11 +633,11 @@ export class HomePage {
           handler: (blah) => {
             this.alertOrganisationnel();
           }
-        }, 
+        },
         {
           text: 'Ok',
           handler: (data) => {
-            this.currentRisk.maitrise.organisationnel = data;
+            this.currentRisk.maitrise.humain = data;
             this.askMaitriceHumainAutre();
           }
         }
@@ -537,68 +645,331 @@ export class HomePage {
     });
     await alert.present();
   }
-  async presentMaitrise() {
-    this.risk.calculateMaitriseNb=this.calculateMaitrise();
-    console.log(this.calculateMaitrise);
-    this.risk.maitrisenumber = this.calculateMaitrise() * this.currentRisk.frequency.value * this.currentRisk.gravity.value;
 
-              this.site.risks.push(this.currentRisk);
-              var newcurrentRisk = {
-                id: 0,
-                name: '',
-                work: '',
-                dommage:'',
-                dommagesautres:'',
-                description:'',
-                frequency:
-                {
-                  name:'',
-                  value:1,
-                },
-                gravity:
-                {
-                  name:'',
-                  value:1,
-                },
-                vigilance: [],
-                maitrise:
-                {
-                  technique: [],
-                  organisationnel: [],
-                  humain: [],
-                  autre: []
-                },
-                maitrisenumber:0,
-                calculateMaitriseNb:0,
-                action:'',
-                maitrisechoice:'',
-                maitrisepondere:0,
-                riskpondere:0
-              }
-              this.currentRisk = newcurrentRisk;
-              this.presentOption();
-        
+  async askMaitriceTechniqueAutre() {
+    let alert = await this.alert.create({
+      header: 'Autre maîtrise technique ?',
+      backdropDismiss: false,
+      inputs: [
+        {
+          name: 'Oui',
+          type: 'radio',
+          value: "oui",
+          label: "Oui",
+
+        },
+        {
+          name: 'Non',
+          label: "Non",
+          type: 'radio',
+          value: "non",
+          checked: true
+        },
+      ],
+      buttons: [
+        {
+          text: 'Suivant',
+          role: 'ok',
+          cssClass: 'secondary',
+          handler: async (data) => {
+            if (data === "oui")
+              this.presentMaitriceTechniqueAutre();
+            else
+              this.alertOrganisationnel();
+          }
+        }
+      ]
+    });
+
+    alert.present();
+  }
+  async presentMaitriceOrganisationelleAutre() {
+    let alert = await this.alert.create({
+      header: 'Autre maîtrise organisationelle',
+      cssClass: 'my-custom-class',
+      backdropDismiss: false,
+      inputs: [
+        {
+          name: 'organisationelleeautres',
+          type: 'text',
+          placeholder: ' ',
+        },
+      ],
+      buttons: [
+        {
+          text: 'Retour',
+          cssClass: 'secondary',
+          handler: () => {
+            this.alertTechnique();
+          },
+        },
+        {
+          text: 'Suivant',
+          handler: async (data) => {
+            this.currentRisk.maitrise.organisationnel.push(data.organisationelleeautres);
+            this.alertHumain();
+          }
+        }
+      ]
+    });
+
+    alert.present();
+  }
+  async askMaitriceOrganisationelleAutre() {
+    let alert = await this.alert.create({
+      header: 'Autre maîtrise organisationelle ?',
+      backdropDismiss: false,
+      inputs: [
+        {
+          name: 'Oui',
+          type: 'radio',
+          value: "oui",
+          label: "Oui",
+
+        },
+        {
+          name: 'Non',
+          label: "Non",
+          type: 'radio',
+          value: "non",
+          checked: true
+        },
+      ],
+      buttons: [
+        {
+          text: 'Suivant',
+          role: 'ok',
+          cssClass: 'secondary',
+          handler: async (data) => {
+            if (data === "oui")
+            this.presentMaitriceOrganisationelleAutre();
+            else
+            this.alertHumain();
+
+          }
+        }
+      ]
+    });
+
+    alert.present();
+  }
+  async presentMaitriceHumainAutre() {
+    let alert = await this.alert.create({
+      header: 'Autre maîtrise humain',
+      cssClass: 'my-custom-class',
+      backdropDismiss: false,
+      inputs: [
+        {
+          name: 'Humaineautres',
+          type: 'text',
+          placeholder: ' ',
+        },
+      ],
+      buttons: [
+        {
+          text: 'Retour',
+          cssClass: 'secondary',
+          handler: () => {
+            this.alertHumain();
+          },
+        },
+        {
+          text: 'Suivant',
+          handler: async (data) => {
+            this.currentRisk.maitrise.humain.push(data.Humaineautres);
+            this.askMaitriseSuffisante();
+          }
+        }
+      ]
+    });
+
+    alert.present();
+  }
+  async askMaitriceHumainAutre() {
+    let alert = await this.alert.create({
+      header: 'Autre maîtrise humain ?',
+      backdropDismiss: false,
+      inputs: [
+        {
+          name: 'Oui',
+          type: 'radio',
+          value: "oui",
+          label: "Oui",
+
+        },
+        {
+          name: 'Non',
+          label: "Non",
+          type: 'radio',
+          value: "non",
+          checked: true
+        },
+      ],
+      buttons: [
+        {
+          text: 'Suivant',
+          role: 'ok',
+          cssClass: 'secondary',
+          handler: async (data) => {
+            if (data === "oui")
+              this.presentMaitriceHumainAutre();
+            else
+              this.askMaitriseSuffisante();
+
+          }
+        }
+      ]
+    });
+
+
+    alert.present();
+  }
+
+
+
+  async presentMaitrise() {
+
+    this.currentRisk.calculateMaitriseNb = await this.calculateMaitrise();
+    this.currentRisk.maitrisenumber = await this.currentRisk.calculateMaitriseNb * this.currentRisk.frequency.value * this.currentRisk.gravity.value;
+
   }
   calculateMaitrise() {
-    let maitrise =4;
+    var maitrise = 4;
 
-    if(this.currentRisk.maitrise.technique.length > 0 ||this.risk[this.index].maitrise.technique.length != 0 )
-        --maitrise;
-    if(this.currentRisk.maitrise.organisationnel.length > 0 ||this.risk[this.index].maitrise.organisationnel.length != 0 )
-        --maitrise;
-    if(this.currentRisk.maitrise.humain.length > 0 ||this.risk[this.index].maitrise.humain.length != 0 )
-        --maitrise;
+    if (this.currentRisk.maitrise.technique.length > 0 || this.risk[this.index].maitrise.technique.length != 0)
+      --maitrise;
+    if (this.currentRisk.maitrise.organisationnel.length > 0 || this.risk[this.index].maitrise.organisationnel.length != 0)
+      --maitrise;
+    if (this.currentRisk.maitrise.humain.length > 0 || this.risk[this.index].maitrise.humain.length != 0)
+      --maitrise;
+    console.log(maitrise);
+    return maitrise;
 
-      return maitrise;
+  }
 
+  async askMaitriseSuffisante() {
+    let alert = await this.alert.create({
+      header: 'Les moyens de maîtrise sont-ils suffisants ?',
+      backdropDismiss: false,
+      inputs: [
+        {
+          name: 'Oui',
+          type: 'radio',
+          value: "oui",
+          label: "Oui",
+          checked: true
+
+        },
+        {
+          name: 'Non',
+          label: "Non",
+          type: 'radio',
+          value: "non",
+         
+        },
+      ],
+      buttons: [
+        {
+          text: 'Suivant',
+          role: 'ok',
+          cssClass: 'secondary',
+          handler: async (data) => {
+
+            this.currentRisk.maitrisechoice = data;
+            if (data === "non") {
+
+              this.calculateMaitrisePondere();
+
+            }
+
+            else {
+              this.presentOption();
+            }
+
+          }
+        }
+      ]
+    });
+    await this.presentMaitrise();
+    alert.present();
   }
   calculateMaitrisePondere() {
 
+    this.currentRisk.maitrisepondere = this.currentRisk.maitrisenumber + 1;
+    this.currentRisk.riskpondere = (this.currentRisk.maitrisenumber + 1) * this.currentRisk.frequency.value * this.currentRisk.gravity.value;
+    this.alertActionsCorrectives();
+  }
 
-    this.currentRisk.riskpondere= (this.currentRisk.maitrisenumber+1)*this.currentRisk.frequency.value * this.currentRisk.gravity.value;;
-}
+  async alertActionsCorrectives() {
+    let alert = await this.alert.create({
+      header: 'Actions correctives',
+      backdropDismiss: false,
+      inputs: [
+        {
+          name: 'action',
+          type: 'text',
+          placeholder: '',
+        },
+      ],
+      buttons: [
+        {
+          text: 'Retour',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            this.askMaitriseSuffisante();
+          }
+        },
+        {
+          text: 'Suivant',
+          role: 'ok',
+          cssClass: 'secondary',
+          handler: async (data) => {
+            this.currentRisk.action = data.action
+            this.presentOption();
+          }
+        }
+      ]
+    });
+
+    alert.present();
+  }
   async presentOption() {
 
+    await this.site.risks.push(this.currentRisk);
+    this.save();
+    var newcurrentRisk = {
+      id: 0,
+      name: '',
+      work: '',
+      dommage: [],
+      dommagesautres: '',
+      description: '',
+      frequency:
+      {
+        name: '',
+        value: 1,
+      },
+      gravity:
+      {
+        name: '',
+        value: 1,
+      },
+      vigilance: [],
+      maitrise:
+      {
+        technique: [],
+        organisationnel: [],
+        humain: [],
+        autre: []
+      },
+      maitrisenumber: 0,
+      calculateMaitriseNb: 0,
+      action: '',
+      maitrisechoice: '',
+      maitrisepondere: 0,
+      riskpondere: 0
+    }
+    this.currentRisk = newcurrentRisk;
     const alert = await this.alert.create({
       cssClass: 'my-custom-class',
       header: 'CHANTIER EvRP',
@@ -609,7 +980,7 @@ export class HomePage {
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
-            this.save();
+         
             this.navigateSynthese();
           }
         }, {
@@ -638,29 +1009,16 @@ export class HomePage {
 
           }
         },
-         {
+        {
           text: 'Ajouter un risque',
-          handler: (data) => {
-            this.presentWork();
+          handler: async (data) => {
+
+            this.presentAlertRisks();
           }
         }
       ]
     });
     await alert.present();
-  }
-  alertMaitrise() {
-    if (this.risk[this.index].maitrise.technique.length != 0) {
-      this.alertTechnique();
-    }
-    else {
-      if (this.risk[this.index].maitrise.organisationnel.length != 0) {
-        this.alertOrganisationnel();
-      }
-      else {
-          this.alertHumain();
-        
-      }
-    }
   }
 
   navigateSynthese() {
@@ -681,344 +1039,8 @@ export class HomePage {
 
   }
 
-  async presentDommagesAutres() {
-    let alert = await this.alert.create({
-      header: 'Autres dommages HSE',
-      cssClass: 'my-custom-class',
-      backdropDismiss: false,
-      inputs: [
-        {
-          name: 'dommagesautres',
-          type: 'text',
-          placeholder: ' ',
-        },
-      ],
-      buttons: [
-        {
-          text: 'Retour',
-          cssClass: 'secondary',
-          handler: () => {
-            this.presentAlertDommage();
-          },
-        },
-         {
-          text: 'Suivant',
-          handler: async (data) => {
-            this.currentRisk.dommagesautres = data;
-            this.presentAlertCritic();
-          }
-        }
-      ]
-    });
 
-    alert.present();
-  }
-  async DommagesAsk()
-  {
-    let alert = await this.alert.create({
-      header: 'Autres dommages HSE ?',
-      backdropDismiss: false,
-      inputs: [
-        {
-          name: 'Oui',
-          type: 'radio',
-          value:"oui",
-          label: "Oui",
 
-        },
-        {
-          name: 'Non',
-          label: "Non",
-          type: 'radio',
-          value:"non",
-          checked:true
-        },
-      ],
-      buttons: [
-        {
-          text:'Suivant',
-          role: 'ok',
-          cssClass: 'secondary',
-          handler: async (data) => {
-            if(data==="oui")
-              this.presentDommagesAutres()
-            else
-            this.presentAlertCritic();
-          }
-        }   
-      ]
-    });
-    
-    alert.present();
-  }
-  async presentMaitriceTechniqueAutre() {
-    let alert = await this.alert.create({
-      header: 'Autre maîtrise technique',
-      cssClass: 'my-custom-class',
-      backdropDismiss: false,
-      inputs: [
-        {
-          name: 'techniqueautres',
-          type: 'text',
-          placeholder: ' ',
-        },
-      ],
-      buttons: [
-        {
-          text: 'Suivant',
-          handler: async (data) => {
-            this.currentRisk.maitrise.technique.push(data.techniqueautres);
-            this.alertOrganisationnel();
-          }
-        }
-      ]
-    });
 
-    alert.present();
-  }
-  async askMaitriceTechniqueAutre()
-  {
-    let alert = await this.alert.create({
-      header: 'Autre maîtrise technique ?',
-      backdropDismiss: false,
-      inputs: [
-        {
-          name: 'Oui',
-          type: 'radio',
-          value:"oui",
-          label: "Oui",
-
-        },
-        {
-          name: 'Non',
-          label: "Non",
-          type: 'radio',
-          value:"non",
-          checked:true
-        },
-      ],
-      buttons: [
-        {
-          text:'Suivant',
-          role: 'ok',
-          cssClass: 'secondary',
-          handler: async (data) => {
-            if(data==="oui")
-              this.presentMaitriceTechniqueAutre();
-            else
-              this.alertHumain();
-          }
-        }   
-      ]
-    });
-    
-    alert.present();
-  }
-  async presentMaitriceOrganisationelleAutre() {
-    let alert = await this.alert.create({
-      header: 'Autre maîtrise organisationelle',
-      cssClass: 'my-custom-class',
-      backdropDismiss: false,
-      inputs: [
-        {
-          name: 'organisationelleeautres',
-          type: 'text',
-          placeholder: ' ',
-        },
-      ],
-      buttons: [
-        {
-          text: 'Retour',
-          cssClass: 'secondary',
-          handler: () => {
-            this.alertTechnique();
-          },
-        },
-         {
-          text: 'Suivant',
-          handler: async (data) => {
-            this.currentRisk.maitrise.organisationnel.push(data.organisationelleeautres);
-            this.alertHumain();
-          }
-        }
-      ]
-    });
-
-    alert.present();
-  }
-  async askMaitriceOrganisationelleAutre()
-  {
-    let alert = await this.alert.create({
-      header: 'Autre maîtrise organisationelle ?',
-      backdropDismiss: false,
-      buttons: [
-        {
-          text:'Non',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-            this.alertHumain();
-          }
-        }, {
-          text: 'Oui',
-          handler:async () => {
-            this.presentMaitriceOrganisationelleAutre();
-          }
-        }
-      ]
-    });
-    
-    alert.present();
-  }
-  async presentMaitriceHumainAutre() {
-    let alert = await this.alert.create({
-      header: 'Autre maîtrise humain',
-      cssClass: 'my-custom-class',
-      backdropDismiss: false,
-      inputs: [
-        {
-          name: 'Humaineautres',
-          type: 'text',
-          placeholder: ' ',
-        },
-      ],
-      buttons: [
-        {
-          text: 'Retour',
-          cssClass: 'secondary',
-          handler: () => {
-            this.alertHumain();
-          },
-        },
-       {
-          text: 'Suivant',
-          handler: async (data) => {
-            this.currentRisk.maitrise.humain.push(data.Humaineautres);
-            this.askMaitriseSuffisante();
-          }
-        }
-      ]
-    });
-
-    alert.present();
-  }
-  async askMaitriceHumainAutre()
-  {
-    let alert = await this.alert.create({
-      header: 'Autre maîtrise humain ?',
-      backdropDismiss: false,
-      inputs: [
-        {
-          name: 'Oui',
-          type: 'radio',
-          value:"oui",
-          label: "Oui",
-
-        },
-        {
-          name: 'Non',
-          label: "Non",
-          type: 'radio',
-          value:"non",
-          checked:true
-        },
-      ],
-      buttons: [
-        {
-          text:'Suivant',
-          role: 'ok',
-          cssClass: 'secondary',
-          handler: async (data) => {
-            if(data==="oui")
-            this.presentMaitriceHumainAutre();
-            else
-            this.askMaitriseSuffisante();
-            
-          }
-        }   
-      ]
-    });
-    
-     
-    alert.present();
-  }
-
-  async askMaitriseSuffisante()
-  {
-    let alert = await this.alert.create({
-      header: 'Les moyens de maîtrise sont-ils suffisants ?',
-      backdropDismiss: false,
-      inputs: [
-        {
-          name: 'Oui',
-          type: 'radio',
-          value:"oui",
-          label: "Oui",
-
-        },
-        {
-          name: 'Non',
-          label: "Non",
-          type: 'radio',
-          value:"non",
-          checked:true
-        },
-      ],
-      buttons: [
-        {
-          text:'Suivant',
-          role: 'ok',
-          cssClass: 'secondary',
-          handler: async (data) => {
-            
-            this.currentRisk.maitrisechoice=data;
-            if(data==="oui")
-            {
-              this.calculateMaitrisePondere();
-              this.alertActionsCorrectives();
-            }
-           
-            else
-              this.presentMaitrise();
-          }
-        }   
-      ]
-    });
-    
-    alert.present();
-  }
-  async alertActionsCorrectives() {
-    let alert = await this.alert.create({
-      header: 'Actions correctives',
-      backdropDismiss: false,
-      inputs: [
-        {
-          name: 'action',
-          type: 'text',
-          placeholder: '',
-        },
-      ],
-      buttons: [
-        {
-          text: 'Retour',
-          cssClass: 'secondary',
-          handler: (blah) => {
-            this.alertPoints();
-          }
-        },
-        {
-          text:'Suivant',
-          role: 'ok',
-          cssClass: 'secondary',
-          handler: async (data) => {
-            this.currentRisk.action=data.action
-            this.presentMaitrise();
-          }
-        }   
-      ]
-    });
-    
-    alert.present();
-  }
 }
 

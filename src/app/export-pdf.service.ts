@@ -59,6 +59,12 @@ console.log(data);
            },
         red:{
           color: 'red',
+        },
+        risk:{
+          fillColor:'orange'
+        },
+        green:{
+          fillColor:'#92D050'
         }
      },
      defaultStyle: {
@@ -92,7 +98,7 @@ console.log(data);
     var body = [];
   
     body.push([
-                  { text:'N°' ,style:'cell'},
+                  { text:'N°' ,style:'green'},
                   { text:'Risque' ,style:'cell'},
                   { text:'Mode de travail',style:'cell'},
                   { text:'Description succinte de la tâche, procédé, installation',style:'cell'},
@@ -112,7 +118,7 @@ console.log(data);
   buildTableHeader(data: any) {
     var body = [];
     let d = new Date();
-    let date = d.getDate() + '/' + d.getMonth() + '/' + d.getFullYear();
+    let date = d.getDate() + '/' + (d.getMonth()+1) + '/' + d.getFullYear();
    body.push([
     {text:'DATE:', style:'tableHeader'},
     {text: date , style:'tableHeader'},
@@ -134,19 +140,19 @@ console.log(data);
   
    
                   body.push([
-                  { text:'Numéro lié au DUERP',style:'cell'},
+                  { text:'Numéro lié au DUERP',style:'green'},
                   { text:'Catégorie',style:'cell'},
                   { text:'N : Normal \n D : Dégradé \n M : Maintenance',style:'cell'},
                   { text:'Décrire la tâche prescrite, de l\'activité',style:'cell'},
                   { text:'Type de blessure ou atteinte à l\'environnement',style:'cell'},
                   { text:'Fréquence',style:'cell'},
                   { text:'Gravité',style:'cell'},
-                  { text:'Risque brut',style:'cell'},
+                  { text:'Risque brut',style:'risk'},
                   { text:'Technique',style:'cell'},
                   { text:'Organisationnel',style:'cell'},
                   { text:'Humain',style:'cell'},
-                  { text:'Maitrise',style:'cell'},
-                  { text:'Risque résiduel',style:'cell'},
+                  { text:'Maitrise',style:'green'},
+                  { text:'Risque résiduel',style:'risk'},
                   { text:'OUI / NON',style:'cell'},
                   { text:'MM pondéré',style:'cell'},
                   { text:'Risque pondéré',style:'cell'},
@@ -158,19 +164,19 @@ console.log(data);
                    var risk=data.risks[i];
                    console.log(risk)
                     body.push([ 
-                      {text: risk.id},
+                      {text: risk.id,style:'green'},
                      {text: risk.name}, 
                      {text:risk.work},
                     {text:risk.description},
                      {text:risk.dommage},
                      {text:risk.frequency.name},
                      {text:risk.gravity.name},
-                     {text:risk.gravity.value*risk.frequency.value},
-                     {text:risk.maitrise.technique},
-                     {text:risk.maitrise.organisationnel},
-                     {text:risk.maitrise.humain},
-                     {text:risk.calculateMaitrise},
-                     {text:risk.maitrisenumber},
+                     {text:risk.gravity.value*risk.frequency.value,style:'risk'},
+                     {text: this.formatText(risk.maitrise.technique)},
+                     {text:this.formatText(risk.maitrise.organisationnel)},
+                     {text:this.formatText(risk.maitrise.humain)},
+                     {text:risk.calculateMaitriseNb,style:'green'},
+                     {text:risk.maitrisenumber,style:'risk'},
                      {text:risk.maitrisechoice},
                      {text: this.maitrisePondere(risk.maitrisepondere)},
                      {text: this.riskPondere(risk.riskpondere)},
@@ -220,6 +226,7 @@ console.log(data);
      text += "- "+ textArray[i]+ '\n';
    }
    text += "- "+ textArray[i];
+   return text;
  }
  
 }
