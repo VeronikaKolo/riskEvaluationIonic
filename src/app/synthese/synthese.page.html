@@ -10,12 +10,7 @@
 <ion-content>
 
    
-  <ion-button id='params' (click)= "exportToExcel()" >
-    <div>
-      <ion-icon name="settings-outline"></ion-icon>
-    <label>Export PDF</label>
-    </div>
-  </ion-button>
+  <ion-button expand="block"   id='params' (click)= "this.exportToPDF()" >Export PDF </ion-button>
   <ion-item id="title">
     SITE
   </ion-item>
@@ -82,7 +77,8 @@
               <ion-input type="text" placeholder="" [(ngModel)]="this.risk.maitrise.humain[i]"></ion-input>
             </ion-item>
             </div>
-     <ion-button (click)="this.deleteRisk()"> Supprimer un risque</ion-button>
+     <ion-button color="danger" expand="block"  (click)="this.deleteRisk()"> Supprimer risque</ion-button>
+     <ion-button color="success" expand="block"  (click)="this.saveRisk()"> Sauvegarder risque</ion-button>
   </div>
-<ion-button (click)="this.addRisk()"> Ajouter un risque</ion-button>  
+<ion-button  color="warning" expand="block"  (click)="this.addRisk()"> Ajouter un risque</ion-button>  
 </ion-content>

@@ -22,13 +22,13 @@
               ],
               "organisationnel":[
                 "Mode opératoire",
-                "Fiches de données sécurité",
                 "Fiches utilisateurs",
                 "Règles de stockage",
                 "Quantité minimum nécessaire au poste"
               ],
               "humain":[
-                  "Formation Risque Chimique"
+                  "Formation Risque Chimique",
+                  "Formation au poste"
               ]
           }
     },
@@ -53,7 +53,8 @@
                   "Vérification des installations électriques"
                 ],
                 "humain":[
-                    "Habilitations nécessaires"
+                    "Habilitations nécessaires",
+                    "Formation au poste"
                 ]
             }
         
@@ -82,7 +83,8 @@
                 ],
                 "humain":[
                     "Sensibilisation",
-                    "Exercice d'évacuation régulier"
+                    "Exercice d'évacuation régulier",
+                    "Formation au poste"
                 ]
             }
         
@@ -131,7 +133,9 @@
                   "Gilet fluorescent"
                 ],
                 "organisationnel":[
-                  "Zoning / Allées piétonnes identifiées"
+                  "Zoning / Allées piétonnes identifiées",
+                  "5S",
+                  "Noyaux HSE"
                 ],
                 "humain":[
                     "Sensibilisation"
@@ -158,10 +162,14 @@
                   "Gilet fluorescent"
                 ],
                 "organisationnel":[
-                  "Zoning / Allées piétonnes identifiées"
+                  "Zoning / Allées piétonnes identifiées",
+                  "Balisage",
+                  "Fiches de sécurité au poste"
                 ],
                 "humain":[
-                    "Sensibilisation"
+                    "Sensibilisation",
+                    "Habilation travail en hauteur",
+                    "Formation Port du Harnais"
                 ]
             }
         
@@ -177,19 +185,21 @@
         "maitrise": 
             {
                 "technique":[
-                  "Sol plan et non dégradé",
+                  "Sol plan et non dégradé et dégagé",
                   "Séparation des flux (véhicules/piétons)",
                   "Gilet fluorescent",
                   "Respect des vitesses / Panneaux STOP"
                 ],
                 "organisationnel":[
                   "Zoning / Allées identifiées",
-                  "Allées propres et dégagées",
-                  "Plan de circulation"
+                  "5S",
+                  "Plan de circulation",
+                  "Fiches de sécurité au poste"
                 ],
                 "humain":[
-                    "Sensibilisation (intégration HSE)",
-                    "Formation Conduite Interne"
+                    "Sensibilisation",
+                    "Formation Conduite Interne",
+                    "Formation au poste"
                 ]
             }
         
@@ -205,10 +215,12 @@
             {
                 "technique":[
                   "EPI (selon la tâche)",
-                  "Balisage des zones de travail"
+                  "Gilet fluorescent"
                 ],
                 "organisationnel":[
-                  "Plan de prévention"
+                  "Plan de prévention",
+                  "Balisage des zones de travail",
+                  "Zoning"
                 ],
                 "humain":[
                     "Sensibilisation/Consignes HSE"
@@ -229,16 +241,19 @@
             {
                 "technique":[
                   "EPI (gants, lunettes)",
-                  "Protection des palletiers"
+                  "Protection des palletiers",
+                  "Grilles, filets de protection"
                 ],
                 "organisationnel":[
                   "Contrôle des palletiers",
                   "Restriction d'accès",
                   "Zoning",
-                  "Respect des charges/hauteurs de stockage"
+                  "Respect des charges/hauteurs de stockage",
+                  "Fiches de sécurité au poste"
                 ],
                 "humain":[
-                    "Formation conduite d'engins"
+                    "Formation conduite d'engins",
+                    "Formation au poste"
                 ]
             }
         
@@ -255,7 +270,8 @@
         "maitrise": 
             {
                 "technique":[
-                  "Systèmes de sécurité actifs (carters, barrières immatérielles, scrutateurs)",
+                  "Systèmes de sécurité actifs (carters, BI, scrutateurs)",
+                  "Protection physique (mousse)",
                   "Outils de consignation (maintenance)",
                   "EPI (gants anti-coupures, manchettes)",
                   "Outils conformes et en bon état"
@@ -264,7 +280,9 @@
                   "Réalisation des OK Démarrage",
                   "Cartographie consignation (maintenance)",
                   "Procédure Kit MR10",
-                  "Zone de pincement en rouge et zone de préhension en vert"
+                  "Zone de pincement en rouge et zone de préhension en vert",
+                  "Noyaux HSE",
+                  "Fiches de sécurité au poste"
                 ],
                 "humain":[
                     "Formation au poste",
@@ -292,11 +310,14 @@
                 "organisationnel":[
                   "Contrôle des engins (OK Démarrage)",
                   "Procédure de levage (charges adéquates)",
-                  "Balisage de la zone de travail"
+                  "Balisage de la zone de travail",
+                  "Fiches de sécurité au poste",
+                  "Respect des vitesses"
                 ],
                 "humain":[
                     "CACES",
-                    "Habilation"
+                    "Autorisation de conduite",
+                    "Formation au poste"
                 ]
             }
         
@@ -318,13 +339,14 @@
                   "Matériel de consignation (maintenance)"
                 ],
                 "organisationnel":[
-                  "Contrôles", 
+                  "Maintenance préventive", 
                   "Cartographie de consignation",
-                  "Instruction de travail"
+                  "Instruction de travail",
+                  "Fiches de sécurité au poste"
                 ],
                 "humain":[
-                    "Formation Consignation",
-                    "Habilitations"
+                  "Formation au poste",
+                  "Formation Consignation"
                 ]
             }
         
@@ -339,11 +361,16 @@
         "maitrise": 
             {
                 "technique":[
-                  "EPI (bouchons d'oreille)"
+                  "EPI (bouchons d'oreille)",
+                  "Cartérisation"
                 ],
-                "organisationnel":[],
+                "organisationnel":[
+                  "Mesures d'exposition au bruit",
+                  "Fiches de sécurité au poste"
+                ],
                 "humain":[
-                    "Sensibilisation"
+                    "Sensibilisation",
+                    "Formation au poste"
                 ]
             }
         
@@ -360,12 +387,13 @@
                 "technique":[
                   "Systèmes d'amortissement",
                   "Poignée anti-vibratoire",
-                  "Etat des sols"
+                  "Tapis anti-fatigue"
                 ],
                 "organisationnel":[
-                  "Systèmes d'amortissement",
-                  "Poignée anti-vibratoire",
-                  "Etat des sols"
+                  "Mesures d'exposition au vibration",
+                  "Sol en bon état ",
+                  "Outils en bon état",
+                  "Fiches de sécurité au poste"
                 ],
                 "humain":[
                     "Formation au poste"
@@ -385,15 +413,17 @@
         "maitrise": 
             {
                 "technique":[
+                  "Aménagement des postes de travail"
                   ],
                 "organisationnel":[
-                  "Organisation du temps de travail",
-                  "Entretien individuel"
+                  "Organisation du temps de travail"
+                  
                 ],
                 "humain":[
+                  "Entretien individuel"
                 ]
             }
-    
+
       },
       {
         "index": "15",
@@ -415,7 +445,12 @@
                 ],
                 "organisationnel":[
                   "Echauffements",
-                  "Poste de travail aménagé"
+                  "Poste de travail aménagé",
+                  "Fiches de sécurité au poste",
+                  "Standard de travail (SW), 5S",
+                  "Pauses régulières",
+                  "Cotation ergonomique",
+                  "Manutention des charges à deux"
                 ],
                 "humain":[
                     "Formation au poste",
@@ -450,11 +485,13 @@
                 "organisationnel":[
                   "Procédure Pollution Kit MR10",
                   "Rangement des stockages extérieurs",
-                  "Gestion organisée des déchets"
+                  "Consigne de gestion des déchets",
+                  "Plan de gestion et solvants",
+                  "Identification des contenants"
                 ],
                 "humain":[
                     "Sensibilisation",
-                    "Communication"
+                    "Formation au poste"
                 ]
             }
         
